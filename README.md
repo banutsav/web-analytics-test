@@ -10,19 +10,23 @@ charts/viz.py
 charts/index.html
 ```
 ### viz.py
-I am using a standard dataset from Plotly to generate a scatter plot
+The query dataset is fed into a method which uses plotly express to generate a scatter plot
 ```python
+fig = px.scatter(topics, x='sequence', y='month', size='hours', color='weightage')
 plot = opy.plot(fig, auto_open=False, output_type='div', include_plotlyjs=False)
 return plot
 ```
 The plot is returned as an HTML div object. The Plotly Javascript libraries are not included within it but will be pulled into the HTML page.
 ### views.py
-The plot div object is called from the list of views.
+The plot div object is called from the list of views. A query data set is passed to it after conversion into a dataframe.
 ```python
 from django.shortcuts import render
 from . import viz
 # Create your views here.
 def index_page(request):
+	# Get Topic data for Grade 8
+	topics = pd.DataFrame(list(EblityTopicTable.objects.filter(grade=8).order_by('sequence')
+		.values_list('topic_name','sequence','month','hours', 'weightage',named=True)))
 	fig = viz.createScatter() 
 	return render(request,'charts/index.html',{'fig':fig})
 ```
