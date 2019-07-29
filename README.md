@@ -1,5 +1,5 @@
 # web-analytics-test
-[Test web application](https://banutsav.pythonanywhere.com/) to trial plotting, dashboards and visualizations. 
+Test web application to trial plotting, dashboards and visualizations. 
 ## Plotly charts in Django web pages
 [Plotly](https://plot.ly/python/) is a powerful plotting library which works with Python and Javascript. 
 This would need to be installed in your virtual environment, along with [Pandas](https://pandas.pydata.org/) and [Numpy](https://numpy.org/)
